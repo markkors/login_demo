@@ -13,7 +13,7 @@ function trycatch_example() {
 }
 
 
-function getSQLConnection() {
+function getSQLConnection() : mysqli {
     static $conn;
     $result = null;
     try {
