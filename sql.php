@@ -1,5 +1,15 @@
 <?php
 
+// lees de ini file met inloggegevens
+$filepath = (dirname(__DIR__) . "\settings.ini");
+$login_data = parse_ini_file($filepath);
+
+
+
+
+//var_dump($login_data);
+
+
 function trycatch_example() {
     try {
         // je code die eventueel fout kan gaan
@@ -14,15 +24,22 @@ function trycatch_example() {
 
 
 function getSQLConnection() : mysqli {
+    global $login_data; // lees de var met inlog gegevens
     static $conn;
     $result = null;
     try {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         if(!isset($conn)) {
-            $conn = new mysqli("localhost",
+            /*$conn = new mysqli("localhost",
                 "systemx_user",
                 "Pa1XYab/T9xb!Dm",
-                "systemx");
+                "systemx");*/
+            $conn = new mysqli(
+                $login_data['server'],
+                $login_data['user'],
+                $login_data['password'],
+                $login_data['database']
+            );
         }
         $result = $conn;
     }

@@ -1,5 +1,4 @@
 <?php
-
 include ("sql.php");
 //var_dump(getSQLConnection());
 
