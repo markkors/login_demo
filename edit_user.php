@@ -11,8 +11,13 @@ if (!(isset($_SESSION['sessionid']) && $_SESSION['sessionid'] == session_id())) 
 
     if(isset($_POST['submit'])) {
         // update met de ingestuurd postdata
-        updateUser();
-        header("terug naar de welkom pagina");
+        $msg = (string)null;
+        $id = htmlspecialchars($_POST['id']);
+        $username = htmlspecialchars($_POST['username']);
+        $rol = htmlspecialchars($_POST['rol']);
+        if(updateUser($id,$username,$rol,$msg)) {
+            header("location: welkom.php");
+        }
     }
 
     $msg = (string)null;

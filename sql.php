@@ -69,13 +69,13 @@ function addUser($username,$password,&$message) : bool {
     return $result;
 }
 
-function updateUser($id,$new,&$message) : bool {
+function updateUser($id,$username,$rol,&$message) : bool {
     $result = false;
     try {
-        $sql = "UPDATE `user` SET `username` = ? WHERE `id`=?";
+        $sql = "UPDATE `user` SET `username` = ?, `rol` = ? WHERE `id`=?";
         $conn = getSQLConnection();
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si",$new,$id);
+        $stmt->bind_param("ssi",$username,$rol,$id);
         if($stmt->execute()) {
             $result = true;
         }
@@ -109,6 +109,8 @@ function getUser(int $id,string &$message) : array {
     }
     return $result;
 }
+
+
 
 
 function getUsers(&$message) : array {
