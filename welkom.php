@@ -10,15 +10,7 @@
         $msg = null;
         $users = getUsers($msg);
         var_dump($users);
-
         $html = getDivTableRows($users);
-
-
-
-
-            //"<a href=\"page.php?id=" . $id . "\">dit is de link</a>";
-
-
 
         if(isset($_POST['logout'])) {
             // logout

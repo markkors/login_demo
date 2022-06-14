@@ -5,11 +5,6 @@ $filepath = (dirname(__DIR__) . "\settings.ini");
 $login_data = parse_ini_file($filepath);
 
 
-
-
-//var_dump($login_data);
-
-
 function trycatch_example() {
     try {
         // je code die eventueel fout kan gaan
@@ -22,7 +17,10 @@ function trycatch_example() {
     }
 }
 
-
+/**
+ * get a MySQLi object
+ * @return mysqli
+ */
 function getSQLConnection() : mysqli {
     global $login_data; // lees de var met inlog gegevens
     static $conn;
@@ -49,6 +47,13 @@ function getSQLConnection() : mysqli {
     return $result;
 }
 
+/**
+ * Add a new user to database
+ * @param $username
+ * @param $password
+ * @param $message
+ * @return bool
+ */
 function addUser($username,$password,&$message) : bool {
     $result = false;
     try {
@@ -69,6 +74,14 @@ function addUser($username,$password,&$message) : bool {
     return $result;
 }
 
+/**
+ * Update user in database with certain id
+ * @param $id
+ * @param $username
+ * @param $rol
+ * @param $message
+ * @return bool
+ */
 function updateUser($id,$username,$rol,&$message) : bool {
     $result = false;
     try {
@@ -87,6 +100,12 @@ function updateUser($id,$username,$rol,&$message) : bool {
     return $result;
 }
 
+/**
+ * Get one user from database with certain id
+ * @param int $id
+ * @param string $message
+ * @return array
+ */
 function getUser(int $id,string &$message) : array {
     $result = null;
     try {
@@ -111,8 +130,11 @@ function getUser(int $id,string &$message) : array {
 }
 
 
-
-
+/**
+ * Get all users from database
+ * @param $message
+ * @return array
+ */
 function getUsers(&$message) : array {
     $result = null;
     try {
@@ -135,10 +157,12 @@ function getUsers(&$message) : array {
 }
 
 
-
-
-
-
+/**
+ * Login a user
+ * @param $username
+ * @param $password
+ * @return bool
+ */
 function loginUser($username, $password) : bool {
     $result = false;
     try {
