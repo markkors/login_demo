@@ -87,7 +87,57 @@ function updateUser($id,$new,&$message) : bool {
     return $result;
 }
 
-function login($username,$password) : bool {
+function getUser(int $id,string &$message) : array {
+    $result = null;
+    try {
+        $sql = "SELECT `id`,`username`,`rol` FROM `user` WHERE `id` =?";
+        $conn = getSQLConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i",$id);
+        if($stmt->execute()) {
+            $r = $stmt->get_result();
+            $users = [];
+            while($obj = $r->fetch_object()) {
+                array_push($users,$obj);
+            }
+            $result = $users;
+        }
+    }
+    catch (Exception $e) {
+        $result = false;
+        $message = $e;
+    }
+    return $result;
+}
+
+
+function getUsers(&$message) : array {
+    $result = null;
+    try {
+        $sql = "SELECT `id`,`username`,`rol` FROM `user`";
+        $conn = getSQLConnection();
+        $stmt = $conn->prepare($sql);
+        if($stmt->execute()) {
+            $r = $stmt->get_result();
+            $users = [];
+            while($obj = $r->fetch_object()) {
+                array_push($users,$obj);
+            }
+            $result = $users;
+        }
+    }
+    catch (Exception $e) {
+        $result = false;
+        $message = $e;
+    } return $result;
+}
+
+
+
+
+
+
+function loginUser($username, $password) : bool {
     $result = false;
     try {
         $sql = "SELECT `username`,`password` FROM `user` WHERE `username` = ? LIMIT 1;";
