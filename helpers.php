@@ -42,7 +42,15 @@ function getUpdateUserForm(array $data) : string {
         if($key=="id") {
             array_push($r,"<input type=\"hidden\" name=\"$key\" value=\"$value\">");
         } else {
-            array_push($r,"<input type=\"text\" name=\"$key\" value=\"$value\">");
+            if($key=="rol") {
+                array_push($r,"<select name=\"$key\">");
+                // bepaal met ternary constructie welke van de opties is geselecteerd..
+                array_push($r,($value=="admin") ? "<option selected value=\"admin\">admin</option>": "<option value=\"admin\">admin</option>");
+                array_push($r,($value=="user") ? "<option selected value=\"user\">user</option>": "<option value=\"user\">user</option>");
+                array_push($r,"</select>");
+            } else {
+                array_push($r,"<input type=\"text\" name=\"$key\" value=\"$value\">");
+            }
         }
 
     }
