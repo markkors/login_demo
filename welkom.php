@@ -7,10 +7,10 @@
         // overzicht van alle gebruikers
         include("sql.php");
         include("helpers.php");
-        $msg = null;
-        $users = getUsers($msg);
-        var_dump($users);
-        $html = getDivTableRows($users);
+        //$msg = null;
+        //$users = getUsers($msg);
+        //var_dump($users);
+        //$html = getDivTableRows($users);
 
         if(isset($_POST['logout'])) {
             // logout
@@ -111,7 +111,7 @@
             <div class="col">username</div>
             <div class="col">rol</div>
         </div>-->
-        <?=$html?>
+        <?=getDivTableRows(getUsers())?>
     </div>
 
 

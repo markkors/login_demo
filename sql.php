@@ -135,7 +135,7 @@ function getUser(int $id,string &$message) : array {
  * @param $message
  * @return array
  */
-function getUsers(&$message) : array {
+function getUsers(&$message=null) : array {
     $result = null;
     try {
         $sql = "SELECT `id`,`username`,`rol` FROM `user`";
